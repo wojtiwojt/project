@@ -9,6 +9,7 @@ python = "3.8.10"
 sphinx = "4.1.2"
 sphinxcontrib-needs = "*"
 sphinx-rtd-theme = "*"
+Django = "3.2.6"
 
 [tool.poetry.dev-dependencies]
 
