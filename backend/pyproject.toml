@@ -10,5 +10,7 @@ sphinx = "4.1.2"
 sphinxcontrib-needs = "*"
 sphinx-rtd-theme = "*"
 Django = "^3.2.7"
+black = "^21.8b0"
+pytest = "^6.2.5"
 
 [tool.poetry.dev-dependencies]
