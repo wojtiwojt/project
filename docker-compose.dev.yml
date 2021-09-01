@@ -20,12 +20,10 @@ services:
       - ./backend:/backend_docker
     # needed without nginx
     ports:
-      - "8021:8021"
+      - "8012:8012"
     stdin_open: true
     tty: true
     depends_on:
       - db
     links:
       - db
-
-
