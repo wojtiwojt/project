@@ -24,6 +24,9 @@ setup:
 	@make migrate
 	@make collectstatic
 
+up:
+	docker-compose -f docker-compose.dev.yml up -d
+
 backend_attach:
 	docker attach backend_desire
 
@@ -37,7 +40,7 @@ blint-fix:
 
 btest-t:
 	docker-compose -f docker-compose.dev.yml exec -T backend pytest
-	
+
 create_docs_as_html:
 	@make  poetry_install
 	docker-compose -f docker-compose.dev.yml exec backend poetry run make html -C docs/
@@ -54,6 +57,12 @@ poetry_lock:
 poetry_add:
 	docker-compose -f docker-compose.dev.yml exec backend poetry add $(package)
 
+poetry_remove:
+	docker-compose -f docker-compose.dev.yml exec backend poetry remove $(package)
+
 poetry_lock_add:
 	@make poetry_add package=$(package)
 	@make poetry_lock
+
+
+# python-decouple
