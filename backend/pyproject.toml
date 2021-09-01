@@ -12,5 +12,6 @@ sphinx-rtd-theme = "*"
 Django = "^3.2.7"
 black = "^21.8b0"
 pytest = "^6.2.5"
+isort = "^5.9.3"
 
 [tool.poetry.dev-dependencies]
