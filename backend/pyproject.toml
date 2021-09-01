@@ -5,7 +5,7 @@ description = ""
 authors = ["Digital-desire"]
 
 [tool.poetry.dependencies]
-python = "3.8.10"
+python = "3.9.7"
 sphinx = "4.1.2"
 sphinxcontrib-needs = "*"
 sphinx-rtd-theme = "*"
