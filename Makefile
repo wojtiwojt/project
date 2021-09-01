@@ -25,7 +25,7 @@ setup:
 	@make collectstatic
 
 backend_attach:
-	docker attach digital_desire_back
+	docker attach backend_desire
 
 create_docs_as_html:
 	@make  poetry_install
@@ -33,3 +33,16 @@ create_docs_as_html:
 
 poetry_install:
 	docker-compose -f docker-compose.dev.yml exec backend poetry install
+
+poetry_lock:
+	docker-compose -f docker-compose.dev.yml exec backend poetry lock --no-update
+
+# Example of use
+# make poetry_add package="black"
+
+poetry_add:
+	docker-compose -f docker-compose.dev.yml exec backend poetry add $(package)
+
+poetry_lock_add:
+	@make poetry_add package=$(package)
+	@make poetry_lock
