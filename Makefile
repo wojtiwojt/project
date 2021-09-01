@@ -35,6 +35,9 @@ blint-fix:
 	docker-compose -f docker-compose.dev.yml exec backend isort apps core apps tests
 	docker-compose -f docker-compose.dev.yml exec backend black core apps tests
 
+btest-t:
+	docker-compose -f docker-compose.dev.yml exec -T backend pytest
+	
 create_docs_as_html:
 	@make  poetry_install
 	docker-compose -f docker-compose.dev.yml exec backend poetry run make html -C docs/
