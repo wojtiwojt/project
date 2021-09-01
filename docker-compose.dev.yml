@@ -1,0 +1,31 @@
+version: "3"
+services:
+  # database
+  db:
+    image: postgres:12
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  # backend
+  backend:
+    env_file: .env
+    build: ./backend
+    container_name: digital_desire_back
+    volumes:
+      - ./backend:/backend_docker
+    # needed without nginx
+    ports:
+      - "8021:8021"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    links:
+      - db
+
+
