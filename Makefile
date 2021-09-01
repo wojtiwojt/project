@@ -27,6 +27,14 @@ setup:
 backend_attach:
 	docker attach backend_desire
 
+blint:
+	docker-compose -f docker-compose.dev.yml exec backend isort -c core apps tests
+	docker-compose -f docker-compose.dev.yml exec backend black core apps tests --check
+
+blint-fix:
+	docker-compose -f docker-compose.dev.yml exec backend isort apps core apps tests
+	docker-compose -f docker-compose.dev.yml exec backend black core apps tests
+
 create_docs_as_html:
 	@make  poetry_install
 	docker-compose -f docker-compose.dev.yml exec backend poetry run make html -C docs/
