@@ -19,7 +19,8 @@
   "devDependencies": {
     "concurrently": "^5.3.0",
     "less": "^4.1.0",
-    "less-watch-compiler": "^1.14.6"
+    "less-watch-compiler": "^1.14.6",
+    "prettier": "2.3.2"
   },
   "scripts": {
     "start": "concurrently --kill-others \"less-watch-compiler --config less-watcher.config.json\" \"react-scripts start\"",

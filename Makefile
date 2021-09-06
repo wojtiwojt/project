@@ -30,6 +30,12 @@ up:
 backend_attach:
 	docker attach backend_desire
 
+eslint-fix:
+	docker-compose -f docker-compose.dev.yml exec frontend npx prettier --write .
+
+eslint:
+	docker-compose -f docker-compose.dev.yml exec frontend npx prettier  --check .
+
 blint:
 	docker-compose -f docker-compose.dev.yml exec backend isort -c core apps tests
 	docker-compose -f docker-compose.dev.yml exec backend black core apps tests --check
