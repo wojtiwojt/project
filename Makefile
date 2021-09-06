@@ -63,6 +63,3 @@ poetry_remove:
 poetry_lock_add:
 	@make poetry_add package=$(package)
 	@make poetry_lock
-
-
-# python-decouple
