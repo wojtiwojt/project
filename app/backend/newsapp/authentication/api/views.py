@@ -1,7 +1,8 @@
 from django.contrib.auth import login, logout
-from rest_framework import views, response, permissions
+from rest_framework import views, response, permissions, generics
 from rest_framework.authentication import SessionAuthentication
-from .serializers import LoginSerializer
+from .serializers import LoginSerializer, RegisterSerializer
+from django.contrib.auth.models import User
 
 
 class LoginView(views.APIView):
@@ -24,3 +25,9 @@ class LogoutView(views.APIView):
     def post(self, request):
         logout(request)
         return response.Response({"success": "You have been logged out."})
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = RegisterSerializer
