@@ -7,6 +7,8 @@ authors = ["Digital-desire"]
 [tool.poetry.dependencies]
 python = "3.8.10"
 django = "3.*"
+djangorestframework = "3.*"
+black = "*"
 
 [tool.poetry.dev-dependencies]
 
