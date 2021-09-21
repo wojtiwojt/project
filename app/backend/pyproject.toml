@@ -9,5 +9,7 @@ python = "3.8.10"
 django = "3.*"
 djangorestframework = "3.*"
 black = "*"
+django-utils-six = "*"
+python-decouple = "*"
 
 [tool.poetry.dev-dependencies]
