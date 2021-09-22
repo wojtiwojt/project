@@ -13,11 +13,15 @@ class CustomUserAdmin(UserAdmin):
         "email",
         "is_staff",
         "is_active",
+        "date_joined",
+        "last_login",
     )
     list_filter = (
         "email",
         "is_staff",
         "is_active",
+        "date_joined",
+        "last_login",
     )
     fieldsets = (
         (None, {"fields": ("email", "password")}),
