@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "Digital-desire"
+version = "0.1.0"
+description = ""
+authors = ["Digital-desire"]
+
+[tool.poetry.dependencies]
+python = "3.9.7"
+sphinx = "4.1.2"
+sphinxcontrib-needs = "*"
+sphinx-rtd-theme = "*"
+Django = "^3.2.7"
+black = "^21.8b0"
+pytest = "^6.2.5"
+isort = "^5.9.3"
+python-decouple = "^3.4"
+psycopg2 = "^2.9.1"
+
+[tool.poetry.dev-dependencies]
