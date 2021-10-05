@@ -69,7 +69,10 @@ def password_reset_request(request):
         password_reset_form = PasswordResetForm(request.POST)
         if password_reset_form.is_valid():
             data = password_reset_form.cleaned_data["email"]
-            user = User.objects.get(email=data)
+            try:
+                user = User.objects.get(email=data)
+            except User.DoesNotExist:
+                user = None
             if user:
                 current_site = get_current_site(request)
                 mail_subject = "Digital-Desire password reset"
@@ -86,6 +89,7 @@ def password_reset_request(request):
                 email.send()
 
                 return redirect("password_reset_done")
+            return HttpResponse("There is no user with this email.")
 
     password_reset_form = PasswordResetForm()
     return render(
