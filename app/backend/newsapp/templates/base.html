@@ -9,6 +9,8 @@
 <body>
     {% if user.is_authenticated %}
     You are logged with email: {{ user_email }}<br><a href="{% url 'logout' %}">Logout</a>
+    <br>
+    <a href="{% url 'password_change' %}">Change password</a>
     {% else %}
     You are not logged in.<br><a href="{% url 'login' %}">Login</a>
     <br>Or <br><a href="{% url 'registration' %}">Create an account</a>
