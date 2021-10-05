@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
@@ -7,8 +7,9 @@ from django.utils.encoding import force_text, force_bytes
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import login
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.tokens import default_token_generator
 from .forms import CustomUserCreationForm
-from .tokens import account_activation_token
 from .models import User
 
 
@@ -35,7 +36,7 @@ class UserRegistrationView(View):
                     "user": user,
                     "domain": current_site.domain,
                     "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                    "token": account_activation_token.make_token(user),
+                    "token": default_token_generator.make_token(user),
                 },
             )
             user_email_adress = form.cleaned_data.get("email")
@@ -52,7 +53,7 @@ class ActivateUserAccount(View):
             user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
-        if user is not None and account_activation_token.check_token(user, token):
+        if user is not None and default_token_generator.check_token(user, token):
             user.is_active = True
             user.save()
             login(request, user)
@@ -61,3 +62,34 @@ class ActivateUserAccount(View):
             )
         else:
             return HttpResponse("Activation link is invalid!")
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data["email"]
+            user = User.objects.get(email=data)
+            if user:
+                current_site = get_current_site(request)
+                mail_subject = "Digital-Desire password reset"
+                message = render_to_string(
+                    "users/password_reset_email.html",
+                    {
+                        "domain": current_site.domain,
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        "token": default_token_generator.make_token(user),
+                    },
+                )
+                email = EmailMessage(mail_subject, message, to=[user.email])
+                email.send()
+
+                return redirect("password_reset_done")
+
+    password_reset_form = PasswordResetForm()
+    return render(
+        request=request,
+        template_name="users/password_reset.html",
+        context={"password_reset_form": password_reset_form},
+    )
