@@ -16,6 +16,4 @@ RUN poetry config virtualenvs.create false && poetry install --no-interaction
 
 COPY . /backend_docker
 
-EXPOSE 8000
-
 CMD ["bash", "-c", "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8012"]

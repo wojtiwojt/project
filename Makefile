@@ -5,7 +5,7 @@ build:
 	docker-compose -f docker-compose.dev.yml  build
 
 clean:
-	docker-compose -f docker-compose.dev.yml down -v
+	docker-compose -f docker-compose.dev.yml down
 
 run:
 	docker-compose -f docker-compose.dev.yml up --build
@@ -17,7 +17,7 @@ migrate:
 	docker-compose -f docker-compose.dev.yml exec backend python3 manage.py migrate
 
 collectstatic:
-	docker-compose -f docker-compose.dev.yml run backend python manage.py collectstatic
+	docker-compose -f docker-compose.dev.yml exec backend python manage.py collectstatic
 
 setup:
 	@make clean
