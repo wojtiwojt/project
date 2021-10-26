@@ -11,5 +11,7 @@ djangorestframework = "3.*"
 black = "*"
 django-utils-six = "*"
 python-decouple = "*"
+pytest-django = "*"
+pytest-cov = "*"
 
 [tool.poetry.dev-dependencies]
