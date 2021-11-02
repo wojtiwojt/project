@@ -1,0 +1,206 @@
+body
+{
+    background-color: #F3F4F6;
+    height:100vh;
+}
+.nav-wrapper
+{
+    background-color: #ffffff;
+    margin-bottom: 40px;
+    height:64px;
+}
+.main
+{
+    height: calc(100% - 64px - 40px);
+    overflow-y: scroll;
+}
+.sekcja
+{
+    color:black;
+    padding-left:30px ;
+    padding-right: 30px;
+    text-align: center;
+}
+.stat
+{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.card-image
+{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.tytulSekcji
+{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+.diagram
+{
+    display: flex;
+    flex-direction: row;
+    padding:10px;
+}
+.chart
+{
+    margin-top: 10px;
+}
+.diagramContent
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.diagramContentUsers
+{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    margin-top:20px;
+}
+.diagramContentUsersLegend
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+    
+}
+.legendTitle
+{
+    font-style: normal;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.6);
+}
+.legendNumbers
+{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+.diagramLegend
+{
+    display: flex;  
+    
+    
+}
+.containerLegenda
+{
+    margin: 0px;
+}
+.diagramLegendColor
+{
+    padding: 5px;
+}
+.cardArticle
+{
+    background-color: #ffffff;
+    border-radius: 10px;
+    
+}
+
+.cardArticle
+{
+    height:25%;
+}
+.rowArticle
+{
+    height:100%;
+    overflow:hidden;
+    
+}
+.imageArticle
+{
+    height:100%;
+    display: flex;
+    justify-content: flex-start;
+  
+    overflow:hidden;
+    
+}
+.textArticle
+{
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    align-items: center;
+    font-size: 14px;
+}
+.textBold
+{
+    font-weight: 600;
+}
+.allArticles
+{
+    height:90%;
+}
+.articleHeader
+{
+    height: 10%;
+}
+.containerArticle
+{
+    height:50%
+}
+.tag
+{
+    background: #F3F4F6;
+    border-radius: 5px;
+    padding:2px;
+    margin-right: 10px;
+}
+.statusIconArticle
+{
+width: 10.74px;
+height: 10.74px;
+border-radius: 57px;
+}
+.statusTextArticle
+{
+    margin-left:10px;
+}
+.iconPublic
+{
+    background: linear-gradient(125.82deg, #1B998B 4.96%, #0B6D63 100%);
+}
+.textPublic
+{
+    color: #1B998B;
+}
+.iconRejected
+{
+    background: linear-gradient(125.82deg, #EE6352 4.96%, #88160D 100%);
+}
+.textRejected
+{
+    color: #EE6352;
+}
+.iconVerify
+{
+    background: linear-gradient(125.82deg, #FDE74C 4.96%, #DBCB5A 100%);
+}
+.textVerify
+{
+    color: #CFBC36;
+}
+.actionIconArticle
+{
+    margin-right: 10px;
+}
+
