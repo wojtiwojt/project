@@ -118,6 +118,7 @@ body
 .cardArticle
 {
     height:25%;
+    max-height: 100px;
 }
 .rowArticle
 {
@@ -153,6 +154,7 @@ body
 .articleHeader
 {
     height: 10%;
+    max-height: 30px;
 }
 .containerArticle
 {
