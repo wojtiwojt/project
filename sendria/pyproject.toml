@@ -1,0 +1,9 @@
+[tool.poetry]
+name = "sendria-app"
+version = "0.1.0"
+description = ""
+authors = ["pozabańką team"]
+
+[tool.poetry.dependencies]
+python = "3.9.*"
+sendria = "2.2.2"
