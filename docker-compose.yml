@@ -1,36 +1,31 @@
 version: "3"
 services:
-  # database
   db:
-    image: postgres:12
-    env_file: .env
+    image: postgres:14
     environment:
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: db
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: pozabanka
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+  documentation:
+    build: ./documentation
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
-
-  # backend
-  backend:
-    env_file: .env
-    build: ./backend
-    container_name: backend_desire
+      - ./documentation:/documentation
+  django:
+    build: ./django
+    environment:
+      SECRET_KEY: hello123
+      EMAIL_HOST: sendria
+      EMAIL_PORT: "1025"
+      EMAIL_HOST_USER: sendria
+      EMAIL_HOST_PASSWORD: sendria
+      EMAIL_USE_TLS: "false"
+      EMAIL_USE_SSL: "false"
     volumes:
-      - ./backend:/backend_docker
-    # needed without nginx
-    ports:
-      - "8012:8012"
-    stdin_open: true
-    tty: true
+      - ./django:/app
     depends_on:
       - db
-    links:
-      - db
-  frontend:
-    build: ./frontend
-    stdin_open: true
-    volumes:
-      - ./frontend/src:/frontend_docker/src
-    ports:
-      - "3000:3000"
+      - sendria
+  sendria:
+    build: ./sendria
+
