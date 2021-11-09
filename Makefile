@@ -1,74 +1,29 @@
-create_docs_as_html:
-	poetry install
-	poetry run make html -C docs/
-build:
-	docker-compose -f docker-compose.dev.yml  build
+dev-stack:
+	docker compose up --abort-on-container-exit --build
+
+dev-documentation:
+	docker compose up --abort-on-container-exit --build documentation
+
+dev-lock: dev-lock-sendria dev-lock-django dev-lock-documentation
+
+dev-lock-documentation:
+	docker compose rm -fsv documentation
+	docker compose run --name $@ documentation poetry lock
+	docker cp $@:/poetry.lock documentation/poetry.lock
+	docker compose rm -fsv documentation
+
+dev-lock-django:
+	docker compose rm -fsv django
+	docker compose run --name $@ django poetry lock
+	docker cp $@:/poetry.lock django/poetry.lock
+	docker compose rm -fsv django
+
+dev-lock-sendria:
+	docker compose rm -fsv sendria
+	docker compose run --name $@ sendria poetry lock
+	docker cp $@:/poetry.lock sendria/poetry.lock
+	docker compose rm -fsv sendria
 
 clean:
-	docker-compose -f docker-compose.dev.yml down
-
-run:
-	docker-compose -f docker-compose.dev.yml up --build
-
-makemigrations:
-	docker-compose -f docker-compose.dev.yml exec backend python3 manage.py makemigrations
-
-migrate:
-	docker-compose -f docker-compose.dev.yml exec backend python3 manage.py migrate
-
-collectstatic:
-	docker-compose -f docker-compose.dev.yml exec backend python manage.py collectstatic
-
-setup:
-	@make clean
-	@make build
-	@make run
-	@make makemigrations
-	@make migrate
-	@make collectstatic
-
-up:
-	docker-compose -f docker-compose.dev.yml up -d
-
-backend_attach:
-	docker attach backend_desire
-
-eslint-fix:
-	docker-compose -f docker-compose.dev.yml exec frontend npx prettier --write .
-
-eslint:
-	docker-compose -f docker-compose.dev.yml exec frontend npx prettier  --check .
-
-blint:
-	docker-compose -f docker-compose.dev.yml exec backend isort -c core apps tests
-	docker-compose -f docker-compose.dev.yml exec backend black core apps tests --check
-
-blint-fix:
-	docker-compose -f docker-compose.dev.yml exec backend isort apps core apps tests
-	docker-compose -f docker-compose.dev.yml exec backend black core apps tests
-
-btest-t:
-	docker-compose -f docker-compose.dev.yml exec -T backend pytest
-
-create_docs_as_html:
-	@make  poetry_install
-	docker-compose -f docker-compose.dev.yml exec backend poetry run make html -C docs/
-
-poetry_install:
-	docker-compose -f docker-compose.dev.yml exec backend poetry install
-
-poetry_lock:
-	docker-compose -f docker-compose.dev.yml exec backend poetry lock --no-update
-
-# Example of use
-# make poetry_add package="black"
-
-poetry_add:
-	docker-compose -f docker-compose.dev.yml exec backend poetry add $(package)
-
-poetry_remove:
-	docker-compose -f docker-compose.dev.yml exec backend poetry remove $(package)
-
-poetry_lock_add:
-	@make poetry_add package=$(package)
-	@make poetry_lock
+	docker compose down
+	docker compose rm -fsv
