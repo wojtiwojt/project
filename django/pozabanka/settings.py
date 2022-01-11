@@ -3,7 +3,7 @@
 from pathlib import Path
 from decouple import config
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 
 
@@ -12,13 +12,13 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = False
 ALLOWED_HOSTS = ["*"]  # we should restrict that on load balancer level, no app level
 INSTALLED_APPS = [
+    'pozabanka.users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pozabanka.users',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,8 +73,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 STATIC_URL = '/static/'
-DEFAULT_AUTO_FIELD = 'django.db.models.UuidField'
-AUTH_USER_MODEL = 'pozabanka.users.User'
+# DEFAULT_AUTO_FIELD = 'django.db.models.UUIDField'  # it does not work for me
+AUTH_USER_MODEL = 'users.User'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 EMAIL_HOST = config('EMAIL_HOST')
