@@ -11,6 +11,8 @@ services:
     build: ./documentation
     volumes:
       - ./documentation:/documentation
+    ports:
+      - 127.0.0.1:8000:8000
   django:
     build: ./django
     environment:
@@ -26,6 +28,10 @@ services:
     depends_on:
       - db
       - sendria
+    ports:
+      - 127.0.0.1:8012:8012
   sendria:
     build: ./sendria
+    ports:
+      - 127.0.0.1:8025:80
 
