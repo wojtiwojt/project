@@ -12,12 +12,18 @@ class Story(models.Model):
     slug = models.SlugField(null=False, unique=True, blank=False)
     title = models.CharField(max_length=255, blank=False)
     description = models.TextField(max_length=600, blank=False)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False, related_name='story_author')
+    author = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=False,
+        related_name="story_author",
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, related_name='story_likes')
-    dislikes = models.ManyToManyField(User, related_name='story_dislike')
-    articles = models.ManyToManyField(Article, related_name='story_articles')
+    likes = models.ManyToManyField(User, related_name="story_likes")
+    dislikes = models.ManyToManyField(User, related_name="story_dislike")
+    articles = models.ManyToManyField(Article, related_name="story_articles")
 
     def __str__(self):
         return self.title
