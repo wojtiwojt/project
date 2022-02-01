@@ -30,8 +30,8 @@ services:
       - sendria
     ports:
       - 127.0.0.1:8012:8012
-  sendria:
-    build: ./sendria
-    ports:
-      - 127.0.0.1:8025:80
+  # sendria:
+  #   build: ./sendria
+  #   ports:
+  #     - 127.0.0.1:8025:80
 
