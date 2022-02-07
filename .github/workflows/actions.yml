@@ -28,5 +28,6 @@ jobs:
       - name: Run pytest on django
         run: |
           cd pozabanka
+          echo "SECRET_KEY=secret-key-for-actions-purposes" > .env
           poetry run pytest
 
