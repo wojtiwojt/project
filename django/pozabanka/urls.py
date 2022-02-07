@@ -7,7 +7,7 @@ from .views import index
 
 
 urlpatterns = [
-    path('', index, name='index-page'),
-    path('admin/', admin.site.urls),
-    path('accounts/', include('pozabanka.users.urls')),
+    path("", index, name="index-page"),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("pozabanka.users.urls")),
 ]
