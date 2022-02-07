@@ -41,4 +41,4 @@ def test_user_login_view(client, create_test_user, test_user_data):
 def test_user_logout_view(client, authenticated_user):
     logout_url = urls.reverse("logout")
     response = client.get(logout_url)
-    assert response.status_code == 200
+    assert response.status_code == 300
