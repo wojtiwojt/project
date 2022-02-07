@@ -1,5 +1,5 @@
 dev-stack:
-	docker compose up --abort-on-container-exit --build
+	docker compose up --build
 
 dev-documentation:
 	docker compose up --abort-on-container-exit --build documentation
