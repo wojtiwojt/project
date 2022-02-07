@@ -27,6 +27,7 @@ jobs:
           poetry run black --check --verbose ./pozabanka
       - name: Create dummy .env file
         run: |
+          cd pozabanka
           echo "SECRET_KEY=secret-key-for-actions-purposes" >> .env
           echo "EMAIL_HOST=smtp.gmail.com" >> .env
           echo "EMAIL_PORT=587" >> .env
@@ -37,6 +38,5 @@ jobs:
       - name: Run pytest on django
         run: |
           cd pozabanka
-          echo "SECRET_KEY=secret-key-for-actions-purposes" > .env
           poetry run pytest
 
